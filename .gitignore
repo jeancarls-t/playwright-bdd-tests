@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Reports
+reports/
+*.html
+
+# Test artifacts
+test-results/
+playwright-report/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+
+# Environment files
+.env
+.env.local

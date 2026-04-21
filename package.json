@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "test": "cucumber-js --config cucumber.json",
+    "test:headed": "cucumber-js --config cucumber.json --world-parameters '{\"headed\":\"true\"}'",
+    "report": "node generate-report.js",
+    "test:full": "npm run test && npm run report"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^12.8.1",
+    "@playwright/test": "^1.59.1",
+    "multiple-cucumber-html-reporter": "^3.10.0",
+    "playwright": "^1.59.1"
+  }
+}

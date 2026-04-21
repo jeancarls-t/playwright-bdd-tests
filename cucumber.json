@@ -1,0 +1,11 @@
+{
+  "default": {
+    "require": [
+      "features/support/world.js",
+      "features/step_definitions/**/*.js"
+    ],
+    "format": ["json:reports/cucumber-report.json"],
+    "paths": ["features/"],
+    "timeout": 20000
+  }
+}
