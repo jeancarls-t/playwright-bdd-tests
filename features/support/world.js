@@ -5,20 +5,21 @@ const BASE_URL = 'https://demowebshop.tricentis.com';
 
 class CustomWorld {
   constructor({ parameters }) {
-    this.headed = true;  // Modo headed para depurar
+    // Detectar si estamos en CI (GitHub Actions)
+    const isCI = process.env.CI === 'true';
+    // En CI siempre headless, local puede ser headed si se especifica
+    this.headed = !isCI && parameters.headed === 'true';
   }
 
   async init() {
     const browser = await chromium.launch({ 
-      headless: false,  // Modo headed
+      headless: !this.headed,  // Si headed=false, headless=true
       timeout: 60000
     });
-    this.context = await browser.newContext();
+    this.context = await browser.newContext({
+      baseURL: BASE_URL
+    });
     this.page = await this.context.newPage();
-    
-    // 🔥 Navegar directamente a la URL completa
-    await this.page.goto(BASE_URL + '/login');
-    console.log('>>> Página cargada:', await this.page.title());
   }
 
   async close() {
