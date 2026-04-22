@@ -5,18 +5,19 @@ const BASE_URL = 'https://demowebshop.tricentis.com';
 
 class CustomWorld {
   constructor({ parameters }) {
-    // Detectar si estamos en CI (GitHub Actions)
     const isCI = process.env.CI === 'true';
-    // En CI siempre headless, local puede ser headed si se especifica
     this.headed = !isCI && parameters.headed === 'true';
+    this.browser = null;
+    this.context = null;
+    this.page = null;
   }
 
   async init() {
-    const browser = await chromium.launch({ 
-      headless: !this.headed,  // Si headed=false, headless=true
+    this.browser = await chromium.launch({ 
+      headless: !this.headed,
       timeout: 60000
     });
-    this.context = await browser.newContext({
+    this.context = await this.browser.newContext({
       baseURL: BASE_URL,
       navigationTimeout: 60000
     });
@@ -24,9 +25,9 @@ class CustomWorld {
   }
 
   async close() {
-    if (this.context) {
-      await this.context.close();
-    }
+    if (this.page) await this.page.close();
+    if (this.context) await this.context.close();
+    if (this.browser) await this.browser.close();
   }
 }
 

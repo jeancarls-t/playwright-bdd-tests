@@ -10,6 +10,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 10  # 🔥 Timeout máximo de 10 minutos
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -33,7 +34,7 @@ jobs:
           echo "DISPLAY=:99" >> $GITHUB_ENV
 
       - name: Run Playwright BDD tests
-        run: npx cucumber-js --config cucumber.json
+        run: npx cucumber-js --config cucumber.json --exit  # 🔥 Agregar --exit
         env:
           CI: true
 

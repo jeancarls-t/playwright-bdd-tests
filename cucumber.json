@@ -6,6 +6,7 @@
     ],
     "format": ["json:reports/cucumber-report.json"],
     "paths": ["features/"],
-    "timeout": 60000
+    "timeout": 60000,
+    "exit": true
   }
 }
