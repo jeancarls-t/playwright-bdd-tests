@@ -25,6 +25,13 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
 
+      - name: Setup Xvfb
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
+          Xvfb :99 -ac &
+          echo "DISPLAY=:99" >> $GITHUB_ENV
+
       - name: Run Playwright BDD tests
         run: npx cucumber-js --config cucumber.json
         env:

@@ -17,7 +17,8 @@ class CustomWorld {
       timeout: 60000
     });
     this.context = await browser.newContext({
-      baseURL: BASE_URL
+      baseURL: BASE_URL,
+      navigationTimeout: 60000
     });
     this.page = await this.context.newPage();
   }

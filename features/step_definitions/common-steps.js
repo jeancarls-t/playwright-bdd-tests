@@ -95,7 +95,8 @@ Then('debería ver el mensaje de error {string}', async function (errorMessage) 
 
 // ==================== LOGIN ====================
 Given('que el usuario está en la página de login', async function () {
-  await this.page.goto('https://demowebshop.tricentis.com/login');
+  await this.page.goto('https://demowebshop.tricentis.com/login', { timeout: 30000 });
+  await this.page.waitForLoadState('networkidle');
   await this.page.waitForTimeout(2000);
   console.log('>>> URL actual:', this.page.url());
 });
